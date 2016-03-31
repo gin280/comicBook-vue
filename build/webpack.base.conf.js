@@ -11,6 +11,11 @@ module.exports = {
     publicPath: './static/',
     filename: '[name].js'
   },
+  externals: {
+    'zepto': 'Zepto',
+    'wx': 'jWeixin',
+    'islider': 'iSlider'
+  },
   resolve: {
     extensions: ['', '.js', '.vue'],
     fallback: [path.join(__dirname, '../node_modules')],
@@ -33,7 +38,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'eslint',
         include: projectRoot,
-        exclude: /node_modules/
+        exclude: [/node_modules/, /assets/]
       }
     ],
     loaders: [
@@ -66,6 +71,7 @@ module.exports = {
     ]
   },
   vue: {
+    postcss: [require('precss')()],
     loaders: cssLoaders()
   },
   eslint: {
